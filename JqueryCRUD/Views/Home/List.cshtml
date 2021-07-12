@@ -1,0 +1,122 @@
+﻿@model IEnumerable<JqueryCRUD.Models.User>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Users List</h2>
+<br />
+
+<button type="button" class="btn btn-primary" data-toggle="modal" id="btnAdd">
+    Add Users
+</button>
+<br />
+<br />
+
+
+<table class="table table-bordered table-condensed" id="usertable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+           
+            <td>
+                <a class="btn btn-success" id="btnUpdateUser" onclick="GetUser(@item.ID)" style='color: white;' data-toggle='tooltip' title='Edit Users' href='javascript:;'>Edit</a> |
+                <a class="btn btn-danger btnDelete" style='color: white;' data-toggle='tooltip' title='Delete Employee' data-id="@item.ID" href='javascript:;'>Delete</a>
+            </td>
+        </tr>
+
+
+        }
+
+    </tbody>
+
+</table>
+
+
+<!-- Modal-->
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLable" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="mConta">
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <span class="col-sm-3 control-label" id="txtID"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="required col-sm-3 control-label" style="font-weight:bold;">Name</span>
+                        <div class="col-sm-9">
+                            <input id="txtName" class="form-control" type="text" placeholder="Enter Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="required col-sm-3 control-label" style="font-weight:bold;">Age</span>
+                        <div class="col-sm-9">
+                            <input id="txtAge" class="form-control" type="text" placeholder="Enter Age" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="required col-sm-3 control-label" style="font-weight:bold;">Country</span>
+                        <div class="col-sm-9">
+                            <input id="txtCountry" class="form-control" type="text" placeholder="Enter Country" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="required col-sm-3 control-label" style="font-weight:bold;">State</span>
+                        <div class="col-sm-9">
+                            <input id="txtState" class="form-control" type="text" placeholder="Enter State" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave">
+                    Save 
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                <button type="button" class="btn btn-primary" id="btnUpdate" hidden" onclick="UpdateUser()">
+                    Update 
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
